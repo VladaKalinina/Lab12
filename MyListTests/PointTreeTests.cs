@@ -6,37 +6,37 @@ namespace Lab12Test;
 [TestClass]
 public class PointTreeTests
 {
-    // Тест конструктора пустого узла
+    // РўРµСЃС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїСѓСЃС‚РѕРіРѕ СѓР·Р»Р°
     [TestMethod]
     public void Constructor_EmptyNode_SetsDefaultValues()
     {
         var node = new PointTree<Plant>();
-        Assert.IsNull(node.Data, "Data должно быть null.");
+        Assert.IsNull(node.Data, "Data РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ null.");
     }
 
-    // Тест конструктора узла с данными
+    // РўРµСЃС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° СѓР·Р»Р° СЃ РґР°РЅРЅС‹РјРё
     [TestMethod]
     public void Constructor_WithData_SetsDataCorrectly()
     {
         var plant = new Plant("TestPlant", "Green", 1);
         var node = new PointTree<Plant>(plant);
-        Assert.AreEqual(plant, node.Data, "Data должно быть равно переданному объекту.");
+        Assert.AreEqual(plant, node.Data, "Data РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЂР°РІРЅРѕ РїРµСЂРµРґР°РЅРЅРѕРјСѓ РѕР±СЉРµРєС‚Сѓ.");
     }
 
-    // Тест строкового представления узла
+    // РўРµСЃС‚ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ СѓР·Р»Р°
     [TestMethod]
     public void ToString_ValidData_ReturnsCorrectString()
     {
         var plant = new Plant("TestPlant", "Green", 1);
         var node = new PointTree<Plant>(plant);
-        Assert.AreEqual("Растение: Имя=TestPlant, Цвет=Green", node.ToString(), "ToString должен возвращать корректную строку.");
+        Assert.AreEqual("Р Р°СЃС‚РµРЅРёРµ: РРјСЏ=TestPlant, Р¦РІРµС‚=Green", node.ToString(), "ToString РґРѕР»Р¶РµРЅ РІРѕР·РІСЂР°С‰Р°С‚СЊ РєРѕСЂСЂРµРєС‚РЅСѓСЋ СЃС‚СЂРѕРєСѓ.");
     }
 
-    // Тест строкового представления пустого узла
+    // РўРµСЃС‚ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РїСѓСЃС‚РѕРіРѕ СѓР·Р»Р°
     [TestMethod]
     public void ToString_NullData_ReturnsEmptyString()
     {
         var node = new PointTree<Plant>();
-        Assert.AreEqual("", node.ToString(), "ToString должен возвращать пустую строку для null Data.");
+        Assert.AreEqual("", node.ToString(), "ToString РґРѕР»Р¶РµРЅ РІРѕР·РІСЂР°С‰Р°С‚СЊ РїСѓСЃС‚СѓСЋ СЃС‚СЂРѕРєСѓ РґР»СЏ null Data.");
     }
 }
