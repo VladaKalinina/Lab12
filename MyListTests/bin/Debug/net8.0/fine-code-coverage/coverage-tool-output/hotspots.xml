@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Hotspots>
+  <Hotspot>
+    <Assembly>Lab12</Assembly>
+    <Class>Lab12.MyTree`1</Class>
+    <MethodName>DeleteNode(...)</MethodName>
+    <ShortName />
+    <Line>231</Line>
+    <FileIndex>0</FileIndex>
+    <Metrics>
+      <Metric>
+        <Name>Cyclomatic complexity</Name>
+        <Exceeded>true</Exceeded>
+        <Value>34</Value>
+      </Metric>
+    </Metrics>
+  </Hotspot>
+  <Hotspot>
+    <Assembly>Lab12</Assembly>
+    <Class>Lab12.MyTree`1</Class>
+    <MethodName>Insert(...)</MethodName>
+    <ShortName />
+    <Line>127</Line>
+    <FileIndex>0</FileIndex>
+    <Metrics>
+      <Metric>
+        <Name>Cyclomatic complexity</Name>
+        <Exceeded>true</Exceeded>
+        <Value>32</Value>
+      </Metric>
+    </Metrics>
+  </Hotspot>
+</Hotspots>
