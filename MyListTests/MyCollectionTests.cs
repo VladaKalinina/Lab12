@@ -1,16 +1,12 @@
 using Plants;
 using Lab12;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Lab12Test
 {
     [TestClass]
     public class MyCollectionTests
     {
-        // Пользовательский класс ключей для создания коллизий
+        // РџРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РєР»Р°СЃСЃ РєР»СЋС‡РµР№ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РєРѕР»Р»РёР·РёР№
         private class CollisionKey
         {
             private readonly int value;
@@ -36,34 +32,34 @@ namespace Lab12Test
             }
         }
 
-        // Тест конструктора пустой коллекции
+        // РўРµСЃС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё
         [TestMethod]
         public void Constructor_EmptyCollection_HasZeroCount()
         {
             var collection = new MyCollection<int, Plant>();
-            Assert.AreEqual(0, collection.Count, "Пустая коллекция должна иметь Count = 0.");
+            Assert.AreEqual(0, collection.Count, "РџСѓСЃС‚Р°СЏ РєРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° РёРјРµС‚СЊ Count = 0.");
         }
 
-        // Тест конструктора с заданным размером
+        // РўРµСЃС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° СЃ Р·Р°РґР°РЅРЅС‹Рј СЂР°Р·РјРµСЂРѕРј
         [TestMethod]
         public void Constructor_WithSize_HasCorrectCapacity()
         {
             var collection = new MyCollection<int, Plant>(5);
-            Assert.AreEqual(5, collection.Capacity, "Коллекция должна иметь заданную ёмкость.");
-            Assert.AreEqual(0, collection.Count, "Count должен быть 0 после создания.");
+            Assert.AreEqual(5, collection.Capacity, "РљРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° РёРјРµС‚СЊ Р·Р°РґР°РЅРЅСѓСЋ С‘РјРєРѕСЃС‚СЊ.");
+            Assert.AreEqual(0, collection.Count, "Count РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 0 РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ.");
         }
 
-        // Тест добавления элемента
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р°
         [TestMethod]
         public void Add_ValidData_IncreasesCount()
         {
             var collection = new MyCollection<int, Plant>();
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
-            Assert.AreEqual(1, collection.Count, "После добавления элемента Count должен быть 1.");
+            Assert.AreEqual(1, collection.Count, "РџРѕСЃР»Рµ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° Count РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 1.");
         }
 
-        // Тест поиска элемента по ключу
+        // РўРµСЃС‚ РїРѕРёСЃРєР° СЌР»РµРјРµРЅС‚Р° РїРѕ РєР»СЋС‡Сѓ
         [TestMethod]
         public void FindByKey_ExistingKey_ReturnsValue()
         {
@@ -71,10 +67,10 @@ namespace Lab12Test
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
             var foundPlant = collection.FindByKey(1);
-            Assert.AreEqual("TestPlant", foundPlant.Name, "Найденный элемент должен иметь корректное имя.");
+            Assert.AreEqual("TestPlant", foundPlant.Name, "РќР°Р№РґРµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РёРјРµС‚СЊ РєРѕСЂСЂРµРєС‚РЅРѕРµ РёРјСЏ.");
         }
 
-        // Тест удаления существующего элемента
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
         [TestMethod]
         public void Remove_ExistingKey_ReducesCount()
         {
@@ -82,31 +78,31 @@ namespace Lab12Test
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
             collection.Remove(1);
-            Assert.AreEqual(0, collection.Count, "После удаления элемента Count должен быть 0.");
+            Assert.AreEqual(0, collection.Count, "РџРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° Count РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 0.");
         }
 
-        // Тест очистки коллекции
+        // РўРµСЃС‚ РѕС‡РёСЃС‚РєРё РєРѕР»Р»РµРєС†РёРё
         [TestMethod]
         public void Clear_ValidCollection_SetsCountToZero()
         {
             var collection = new MyCollection<int, Plant>();
             var plant = new Plant("TestPlant", "Green", 1);
-            collection.Add(1, plant); // Добавляем элемент перед очисткой
+            collection.Add(1, plant); // Р”РѕР±Р°РІР»СЏРµРј СЌР»РµРјРµРЅС‚ РїРµСЂРµРґ РѕС‡РёСЃС‚РєРѕР№
             collection.Clear();
-            Assert.AreEqual(0, collection.Count, "После очистки коллекции Count должен быть 0.");
+            Assert.AreEqual(0, collection.Count, "РџРѕСЃР»Рµ РѕС‡РёСЃС‚РєРё РєРѕР»Р»РµРєС†РёРё Count РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 0.");
         }
 
-        // Тест проверки наличия ключа
+        // РўРµСЃС‚ РїСЂРѕРІРµСЂРєРё РЅР°Р»РёС‡РёСЏ РєР»СЋС‡Р°
         [TestMethod]
         public void ContainsKey_ExistingKey_ReturnsTrue()
         {
             var collection = new MyCollection<int, Plant>();
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
-            Assert.IsTrue(collection.ContainsKey(1), "Коллекция должна содержать ключ 1.");
+            Assert.IsTrue(collection.ContainsKey(1), "РљРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° СЃРѕРґРµСЂР¶Р°С‚СЊ РєР»СЋС‡ 1.");
         }
 
-        // Тест копирования элементов в массив
+        // РўРµСЃС‚ РєРѕРїРёСЂРѕРІР°РЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ РІ РјР°СЃСЃРёРІ
         [TestMethod]
         public void CopyTo_ValidArray_CopiesElements()
         {
@@ -115,10 +111,10 @@ namespace Lab12Test
             collection.Add(1, plant);
             var array = new KeyValuePair<int, Plant>[1];
             collection.CopyTo(array, 0);
-            Assert.AreEqual("TestPlant", array[0].Value.Name, "Скопированный элемент должен иметь корректное имя.");
+            Assert.AreEqual("TestPlant", array[0].Value.Name, "РЎРєРѕРїРёСЂРѕРІР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РёРјРµС‚СЊ РєРѕСЂСЂРµРєС‚РЅРѕРµ РёРјСЏ.");
         }
 
-        // Тест вывода коллекции в консоль
+        // РўРµСЃС‚ РІС‹РІРѕРґР° РєРѕР»Р»РµРєС†РёРё РІ РєРѕРЅСЃРѕР»СЊ
         [TestMethod]
         public void Print_ValidCollection_OutputsCorrectFormat()
         {
@@ -130,11 +126,11 @@ namespace Lab12Test
                 Console.SetOut(sw);
                 collection.Print();
                 string output = sw.ToString();
-                Assert.IsTrue(output.Contains("TestPlant"), "Вывод должен содержать имя элемента.");
+                Assert.IsTrue(output.Contains("TestPlant"), "Р’С‹РІРѕРґ РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РёРјСЏ СЌР»РµРјРµРЅС‚Р°.");
             }
         }
 
-        // Тест глубокого клонирования коллекции
+        // РўРµСЃС‚ РіР»СѓР±РѕРєРѕРіРѕ РєР»РѕРЅРёСЂРѕРІР°РЅРёСЏ РєРѕР»Р»РµРєС†РёРё
         [TestMethod]
         public void Constructor_DeepCopy_DoesNotModifyOriginal()
         {
@@ -143,10 +139,10 @@ namespace Lab12Test
             original.Add(1, plant);
             var cloned = new MyCollection<int, Plant>(original);
             cloned.FindByKey(1).Name = "ModifiedPlant";
-            Assert.AreEqual("TestPlant", original.FindByKey(1).Name, "Оригинальный элемент не должен измениться после клонирования.");
+            Assert.AreEqual("TestPlant", original.FindByKey(1).Name, "РћСЂРёРіРёРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅРµ РґРѕР»Р¶РµРЅ РёР·РјРµРЅРёС‚СЊСЃСЏ РїРѕСЃР»Рµ РєР»РѕРЅРёСЂРѕРІР°РЅРёСЏ.");
         }
 
-        // Тест добавления элемента с уже существующим ключом
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° СЃ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РєР»СЋС‡РѕРј
         [TestMethod]
         public void Add_DuplicateKey_ThrowsArgumentException()
         {
@@ -157,24 +153,24 @@ namespace Lab12Test
             try
             {
                 collection.Add(1, plant2);
-                Assert.Fail("Добавление элемента с существующим ключом должно выбросить исключение.");
+                Assert.Fail("Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СЃ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РєР»СЋС‡РѕРј РґРѕР»Р¶РЅРѕ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (ArgumentException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение ArgumentException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ ArgumentException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест поиска несуществующего ключа
+        // РўРµСЃС‚ РїРѕРёСЃРєР° РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°
         [TestMethod]
         public void FindByKey_NonExistingKey_ReturnsDefault()
         {
             var collection = new MyCollection<int, Plant>();
             var result = collection.FindByKey(999);
-            Assert.IsNull(result, "Поиск несуществующего ключа должен вернуть null.");
+            Assert.IsNull(result, "РџРѕРёСЃРє РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р° РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ null.");
         }
 
-        // Тест использования индексатора для получения значения
+        // РўРµСЃС‚ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РёРЅРґРµРєСЃР°С‚РѕСЂР° РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ Р·РЅР°С‡РµРЅРёСЏ
         [TestMethod]
         public void Indexer_Get_ExistingKey_ReturnsValue()
         {
@@ -182,22 +178,22 @@ namespace Lab12Test
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
             var value = collection[1];
-            Assert.AreEqual("TestPlant", value.Name, "Индексатор должен вернуть элемент с корректным именем.");
+            Assert.AreEqual("TestPlant", value.Name, "РРЅРґРµРєСЃР°С‚РѕСЂ РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ СЌР»РµРјРµРЅС‚ СЃ РєРѕСЂСЂРµРєС‚РЅС‹Рј РёРјРµРЅРµРј.");
         }
 
-        // Тест использования индексатора для установки значения
+        // РўРµСЃС‚ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РёРЅРґРµРєСЃР°С‚РѕСЂР° РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё Р·РЅР°С‡РµРЅРёСЏ
         [TestMethod]
         public void Indexer_Set_ExistingKey_UpdatesValue()
         {
             var collection = new MyCollection<int, Plant>();
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
-            collection.Add(1, plant1); // Ручное добавление вместо использования конструктора
+            collection.Add(1, plant1); // Р СѓС‡РЅРѕРµ РґРѕР±Р°РІР»РµРЅРёРµ РІРјРµСЃС‚Рѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
             collection[1] = plant2;
-            Assert.AreEqual("TestPlant2", collection.FindByKey(1).Name, "Индексатор должен обновить значение элемента.");
+            Assert.AreEqual("TestPlant2", collection.FindByKey(1).Name, "РРЅРґРµРєСЃР°С‚РѕСЂ РґРѕР»Р¶РµРЅ РѕР±РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°.");
         }
 
-        // Тест метода Contains для KeyValuePair
+        // РўРµСЃС‚ РјРµС‚РѕРґР° Contains РґР»СЏ KeyValuePair
         [TestMethod]
         public void Contains_ExistingPair_ReturnsTrue()
         {
@@ -205,10 +201,10 @@ namespace Lab12Test
             var plant = new Plant("TestPlant", "Green", 1);
             collection.Add(1, plant);
             var pair = new KeyValuePair<int, Plant>(1, plant);
-            Assert.IsTrue(collection.Contains(pair), "Коллекция должна содержать указанную пару ключ-значение.");
+            Assert.IsTrue(collection.Contains(pair), "РљРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° СЃРѕРґРµСЂР¶Р°С‚СЊ СѓРєР°Р·Р°РЅРЅСѓСЋ РїР°СЂСѓ РєР»СЋС‡-Р·РЅР°С‡РµРЅРёРµ.");
         }
 
-        // Тест свойства Keys
+        // РўРµСЃС‚ СЃРІРѕР№СЃС‚РІР° Keys
         [TestMethod]
         public void Keys_ValidCollection_ReturnsCorrectKeys()
         {
@@ -218,10 +214,10 @@ namespace Lab12Test
             collection.Add(1, plant1);
             collection.Add(2, plant2);
             var keys = collection.Keys;
-            Assert.AreEqual(2, keys.Count, "Свойство Keys должно вернуть 2 ключа.");
+            Assert.AreEqual(2, keys.Count, "РЎРІРѕР№СЃС‚РІРѕ Keys РґРѕР»Р¶РЅРѕ РІРµСЂРЅСѓС‚СЊ 2 РєР»СЋС‡Р°.");
         }
 
-        // Тест свойства Values
+        // РўРµСЃС‚ СЃРІРѕР№СЃС‚РІР° Values
         [TestMethod]
         public void Values_ValidCollection_ReturnsCorrectValues()
         {
@@ -231,10 +227,10 @@ namespace Lab12Test
             collection.Add(1, plant1);
             collection.Add(2, plant2);
             var values = collection.Values;
-            Assert.AreEqual(2, values.Count, "Свойство Values должно вернуть 2 значения.");
+            Assert.AreEqual(2, values.Count, "РЎРІРѕР№СЃС‚РІРѕ Values РґРѕР»Р¶РЅРѕ РІРµСЂРЅСѓС‚СЊ 2 Р·РЅР°С‡РµРЅРёСЏ.");
         }
 
-        // Тест метода TryGetValue для существующего ключа
+        // РўРµСЃС‚ РјРµС‚РѕРґР° TryGetValue РґР»СЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°
         [TestMethod]
         public void TryGetValue_ExistingKey_ReturnsTrue()
         {
@@ -243,20 +239,20 @@ namespace Lab12Test
             collection.Add(1, plant);
             Plant value;
             var result = collection.TryGetValue(1, out value);
-            Assert.IsTrue(result, "TryGetValue должен вернуть true для существующего ключа.");
+            Assert.IsTrue(result, "TryGetValue РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ true РґР»СЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°.");
         }
 
-        // Тест метода TryGetValue для несуществующего ключа
+        // РўРµСЃС‚ РјРµС‚РѕРґР° TryGetValue РґР»СЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°
         [TestMethod]
         public void TryGetValue_NonExistingKey_ReturnsFalse()
         {
             var collection = new MyCollection<int, Plant>();
             Plant value;
             var result = collection.TryGetValue(999, out value);
-            Assert.IsFalse(result, "TryGetValue должен вернуть false для несуществующего ключа.");
+            Assert.IsFalse(result, "TryGetValue РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ false РґР»СЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°.");
         }
 
-        // Тест добавления null значения
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ null Р·РЅР°С‡РµРЅРёСЏ
         [TestMethod]
         public void Add_NullValue_ThrowsArgumentNullException()
         {
@@ -264,15 +260,15 @@ namespace Lab12Test
             try
             {
                 collection.Add(1, null);
-                Assert.Fail("Добавление null значения должно выбросить исключение.");
+                Assert.Fail("Р”РѕР±Р°РІР»РµРЅРёРµ null Р·РЅР°С‡РµРЅРёСЏ РґРѕР»Р¶РЅРѕ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (ArgumentNullException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение ArgumentNullException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ ArgumentNullException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест доступа к несуществующему ключу через индексатор
+        // РўРµСЃС‚ РґРѕСЃС‚СѓРїР° Рє РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРјСѓ РєР»СЋС‡Сѓ С‡РµСЂРµР· РёРЅРґРµРєСЃР°С‚РѕСЂ
         [TestMethod]
         public void Indexer_Get_NonExistingKey_ThrowsKeyNotFoundException()
         {
@@ -280,15 +276,15 @@ namespace Lab12Test
             try
             {
                 var value = collection[999];
-                Assert.Fail("Доступ к несуществующему ключу должен выбросить исключение.");
+                Assert.Fail("Р”РѕСЃС‚СѓРї Рє РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРјСѓ РєР»СЋС‡Сѓ РґРѕР»Р¶РµРЅ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (KeyNotFoundException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение KeyNotFoundException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ KeyNotFoundException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест CopyTo с некорректным arrayIndex
+        // РўРµСЃС‚ CopyTo СЃ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј arrayIndex
         [TestMethod]
         public void CopyTo_NegativeArrayIndex_ThrowsArgumentOutOfRangeException()
         {
@@ -299,15 +295,15 @@ namespace Lab12Test
             try
             {
                 collection.CopyTo(array, -1);
-                Assert.Fail("CopyTo с отрицательным arrayIndex должен выбросить исключение.");
+                Assert.Fail("CopyTo СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј arrayIndex РґРѕР»Р¶РµРЅ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (ArgumentOutOfRangeException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение ArgumentOutOfRangeException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ ArgumentOutOfRangeException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест CopyTo с недостаточным размером массива
+        // РўРµСЃС‚ CopyTo СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅС‹Рј СЂР°Р·РјРµСЂРѕРј РјР°СЃСЃРёРІР°
         [TestMethod]
         public void CopyTo_InsufficientArraySize_ThrowsArgumentException()
         {
@@ -320,15 +316,15 @@ namespace Lab12Test
             try
             {
                 collection.CopyTo(array, 0);
-                Assert.Fail("CopyTo с недостаточным размером массива должен выбросить исключение.");
+                Assert.Fail("CopyTo СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅС‹Рј СЂР°Р·РјРµСЂРѕРј РјР°СЃСЃРёРІР° РґРѕР»Р¶РµРЅ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (ArgumentException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение ArgumentException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ ArgumentException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест CopyTo с null массивом
+        // РўРµСЃС‚ CopyTo СЃ null РјР°СЃСЃРёРІРѕРј
         [TestMethod]
         public void CopyTo_NullArray_ThrowsArgumentNullException()
         {
@@ -338,24 +334,24 @@ namespace Lab12Test
             try
             {
                 collection.CopyTo(null, 0);
-                Assert.Fail("CopyTo с null массивом должен выбросить исключение.");
+                Assert.Fail("CopyTo СЃ null РјР°СЃСЃРёРІРѕРј РґРѕР»Р¶РµРЅ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (ArgumentNullException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение ArgumentNullException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ ArgumentNullException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
 
-        // Тест удаления несуществующего ключа
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р°
         [TestMethod]
         public void Remove_NonExistingKey_ReturnsFalse()
         {
             var collection = new MyCollection<int, Plant>();
             var result = collection.Remove(999);
-            Assert.IsFalse(result, "Удаление несуществующего ключа должно вернуть false.");
+            Assert.IsFalse(result, "РЈРґР°Р»РµРЅРёРµ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»СЋС‡Р° РґРѕР»Р¶РЅРѕ РІРµСЂРЅСѓС‚СЊ false.");
         }
 
-        // Тест удаления через KeyValuePair
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ С‡РµСЂРµР· KeyValuePair
         [TestMethod]
         public void Remove_ExistingPair_ReducesCount()
         {
@@ -364,10 +360,10 @@ namespace Lab12Test
             collection.Add(1, plant);
             var pair = new KeyValuePair<int, Plant>(1, plant);
             collection.Remove(pair);
-            Assert.AreEqual(0, collection.Count, "После удаления пары Count должен быть 0.");
+            Assert.AreEqual(0, collection.Count, "РџРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ РїР°СЂС‹ Count РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 0.");
         }
 
-        // Тест удаления несуществующей пары
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ РїР°СЂС‹
         [TestMethod]
         public void Remove_NonExistingPair_ReturnsFalse()
         {
@@ -375,24 +371,24 @@ namespace Lab12Test
             var plant = new Plant("TestPlant", "Green", 1);
             var pair = new KeyValuePair<int, Plant>(999, plant);
             var result = collection.Remove(pair);
-            Assert.IsFalse(result, "Удаление несуществующей пары должно вернуть false.");
+            Assert.IsFalse(result, "РЈРґР°Р»РµРЅРёРµ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ РїР°СЂС‹ РґРѕР»Р¶РЅРѕ РІРµСЂРЅСѓС‚СЊ false.");
         }
 
-        // Тест увеличения размера таблицы при превышении fillRatio
+        // РўРµСЃС‚ СѓРІРµР»РёС‡РµРЅРёСЏ СЂР°Р·РјРµСЂР° С‚Р°Р±Р»РёС†С‹ РїСЂРё РїСЂРµРІС‹С€РµРЅРёРё fillRatio
         [TestMethod]
         public void Add_TriggerResize_IncreasesCapacity()
         {
-            var collection = new MyCollection<int, Plant>(2); // Начальная ёмкость 2
+            var collection = new MyCollection<int, Plant>(2); // РќР°С‡Р°Р»СЊРЅР°СЏ С‘РјРєРѕСЃС‚СЊ 2
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
             var plant3 = new Plant("TestPlant3", "Blue", 3);
-            collection.Add(1, plant1); // Ручное добавление элементов
+            collection.Add(1, plant1); // Р СѓС‡РЅРѕРµ РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ
             collection.Add(2, plant2);
-            collection.Add(3, plant3); // Должно вызвать увеличение таблицы
-            Assert.IsTrue(collection.Capacity > 2, "Ёмкость должна увеличиться после превышения fillRatio.");
+            collection.Add(3, plant3); // Р”РѕР»Р¶РЅРѕ РІС‹Р·РІР°С‚СЊ СѓРІРµР»РёС‡РµРЅРёРµ С‚Р°Р±Р»РёС†С‹
+            Assert.IsTrue(collection.Capacity > 2, "РЃРјРєРѕСЃС‚СЊ РґРѕР»Р¶РЅР° СѓРІРµР»РёС‡РёС‚СЊСЃСЏ РїРѕСЃР»Рµ РїСЂРµРІС‹С€РµРЅРёСЏ fillRatio.");
         }
 
-        // Тест итератора на пустой коллекции
+        // РўРµСЃС‚ РёС‚РµСЂР°С‚РѕСЂР° РЅР° РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё
         [TestMethod]
         public void GetEnumerator_EmptyCollection_ReturnsNoElements()
         {
@@ -402,10 +398,10 @@ namespace Lab12Test
             {
                 count++;
             }
-            Assert.AreEqual(0, count, "Итератор пустой коллекции не должен возвращать элементы.");
+            Assert.AreEqual(0, count, "РС‚РµСЂР°С‚РѕСЂ РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё РЅРµ РґРѕР»Р¶РµРЅ РІРѕР·РІСЂР°С‰Р°С‚СЊ СЌР»РµРјРµРЅС‚С‹.");
         }
 
-        // Тест итератора на непустой коллекции
+        // РўРµСЃС‚ РёС‚РµСЂР°С‚РѕСЂР° РЅР° РЅРµРїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё
         [TestMethod]
         public void GetEnumerator_NonEmptyCollection_ReturnsAllElements()
         {
@@ -419,24 +415,24 @@ namespace Lab12Test
             {
                 count++;
             }
-            Assert.AreEqual(2, count, "Итератор должен вернуть все 2 элемента.");
+            Assert.AreEqual(2, count, "РС‚РµСЂР°С‚РѕСЂ РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ РІСЃРµ 2 СЌР»РµРјРµРЅС‚Р°.");
         }
 
-        // Тест добавления с коллизией ключей
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ СЃ РєРѕР»Р»РёР·РёРµР№ РєР»СЋС‡РµР№
         [TestMethod]
         public void Add_WithCollision_HandlesQuadraticProbing()
         {
             var collection = new MyCollection<CollisionKey, Plant>();
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
-            var key1 = new CollisionKey(1, 0); // Оба ключа имеют хеш-код 0
+            var key1 = new CollisionKey(1, 0); // РћР±Р° РєР»СЋС‡Р° РёРјРµСЋС‚ С…РµС€-РєРѕРґ 0
             var key2 = new CollisionKey(2, 0);
             collection.Add(key1, plant1);
             collection.Add(key2, plant2);
-            Assert.AreEqual(2, collection.Count, "Коллекция должна корректно обработать коллизию и добавить 2 элемента.");
+            Assert.AreEqual(2, collection.Count, "РљРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° РєРѕСЂСЂРµРєС‚РЅРѕ РѕР±СЂР°Р±РѕС‚Р°С‚СЊ РєРѕР»Р»РёР·РёСЋ Рё РґРѕР±Р°РІРёС‚СЊ 2 СЌР»РµРјРµРЅС‚Р°.");
         }
 
-        // Тест добавления с несколькими коллизиями
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ СЃ РЅРµСЃРєРѕР»СЊРєРёРјРё РєРѕР»Р»РёР·РёСЏРјРё
         [TestMethod]
         public void Add_WithMultipleCollisions_HandlesQuadraticProbing()
         {
@@ -445,7 +441,7 @@ namespace Lab12Test
             var plant2 = new Plant("TestPlant2", "Red", 2);
             var plant3 = new Plant("TestPlant3", "Blue", 3);
             var plant4 = new Plant("TestPlant4", "Yellow", 4);
-            var key1 = new CollisionKey(1, 0); // Все ключи имеют хеш-код 0
+            var key1 = new CollisionKey(1, 0); // Р’СЃРµ РєР»СЋС‡Рё РёРјРµСЋС‚ С…РµС€-РєРѕРґ 0
             var key2 = new CollisionKey(2, 0);
             var key3 = new CollisionKey(3, 0);
             var key4 = new CollisionKey(4, 0);
@@ -453,25 +449,25 @@ namespace Lab12Test
             collection.Add(key2, plant2);
             collection.Add(key3, plant3);
             collection.Add(key4, plant4);
-            Assert.AreEqual(4, collection.Count, "Коллекция должна обработать 4 коллизии и добавить все элементы.");
+            Assert.AreEqual(4, collection.Count, "РљРѕР»Р»РµРєС†РёСЏ РґРѕР»Р¶РЅР° РѕР±СЂР°Р±РѕС‚Р°С‚СЊ 4 РєРѕР»Р»РёР·РёРё Рё РґРѕР±Р°РІРёС‚СЊ РІСЃРµ СЌР»РµРјРµРЅС‚С‹.");
         }
 
-        // Тест поиска с коллизией ключей
+        // РўРµСЃС‚ РїРѕРёСЃРєР° СЃ РєРѕР»Р»РёР·РёРµР№ РєР»СЋС‡РµР№
         [TestMethod]
         public void FindByKey_WithCollision_ReturnsCorrectValue()
         {
             var collection = new MyCollection<CollisionKey, Plant>();
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
-            var key1 = new CollisionKey(1, 0); // Оба ключа имеют хеш-код 0
+            var key1 = new CollisionKey(1, 0); // РћР±Р° РєР»СЋС‡Р° РёРјРµСЋС‚ С…РµС€-РєРѕРґ 0
             var key2 = new CollisionKey(2, 0);
             collection.Add(key1, plant1);
             collection.Add(key2, plant2);
             var foundPlant = collection.FindByKey(key2);
-            Assert.AreEqual("TestPlant2", foundPlant.Name, "FindByKey должен найти второй элемент при коллизии.");
+            Assert.AreEqual("TestPlant2", foundPlant.Name, "FindByKey РґРѕР»Р¶РµРЅ РЅР°Р№С‚Рё РІС‚РѕСЂРѕР№ СЌР»РµРјРµРЅС‚ РїСЂРё РєРѕР»Р»РёР·РёРё.");
         }
 
-        // Тест поиска с завершением цикла
+        // РўРµСЃС‚ РїРѕРёСЃРєР° СЃ Р·Р°РІРµСЂС€РµРЅРёРµРј С†РёРєР»Р°
         [TestMethod]
         public void FindByKey_LoopCompletes_ReturnsDefault()
         {
@@ -487,25 +483,25 @@ namespace Lab12Test
             collection.Add(key2, plant2);
             collection.Add(key3, plant3);
             var result = collection.FindByKey(keyNotFound);
-            Assert.IsNull(result, "FindByKey должен вернуть null, если ключ не найден после полного обхода.");
+            Assert.IsNull(result, "FindByKey РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ null, РµСЃР»Рё РєР»СЋС‡ РЅРµ РЅР°Р№РґРµРЅ РїРѕСЃР»Рµ РїРѕР»РЅРѕРіРѕ РѕР±С…РѕРґР°.");
         }
 
-        // Тест удаления с коллизией ключей
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ СЃ РєРѕР»Р»РёР·РёРµР№ РєР»СЋС‡РµР№
         [TestMethod]
         public void Remove_WithCollision_RemovesCorrectElement()
         {
             var collection = new MyCollection<CollisionKey, Plant>();
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
-            var key1 = new CollisionKey(1, 0); // Оба ключа имеют хеш-код 0
+            var key1 = new CollisionKey(1, 0); // РћР±Р° РєР»СЋС‡Р° РёРјРµСЋС‚ С…РµС€-РєРѕРґ 0
             var key2 = new CollisionKey(2, 0);
             collection.Add(key1, plant1);
             collection.Add(key2, plant2);
             collection.Remove(key1);
-            Assert.AreEqual(1, collection.Count, "Remove должен удалить первый элемент, оставив второй.");
+            Assert.AreEqual(1, collection.Count, "Remove РґРѕР»Р¶РµРЅ СѓРґР°Р»РёС‚СЊ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚, РѕСЃС‚Р°РІРёРІ РІС‚РѕСЂРѕР№.");
         }
 
-        // Тест удаления с завершением цикла
+        // РўРµСЃС‚ СѓРґР°Р»РµРЅРёСЏ СЃ Р·Р°РІРµСЂС€РµРЅРёРµРј С†РёРєР»Р°
         [TestMethod]
         public void Remove_LoopCompletes_ReturnsFalse()
         {
@@ -521,10 +517,10 @@ namespace Lab12Test
             collection.Add(key2, plant2);
             collection.Add(key3, plant3);
             var result = collection.Remove(keyNotFound);
-            Assert.IsFalse(result, "Remove должен вернуть false, если ключ не найден после полного обхода.");
+            Assert.IsFalse(result, "Remove РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊ false, РµСЃР»Рё РєР»СЋС‡ РЅРµ РЅР°Р№РґРµРЅ РїРѕСЃР»Рµ РїРѕР»РЅРѕРіРѕ РѕР±С…РѕРґР°.");
         }
 
-        // Тест добавления после удаления (использование deleted флага)
+        // РўРµСЃС‚ РґРѕР±Р°РІР»РµРЅРёСЏ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ (РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ deleted С„Р»Р°РіР°)
         [TestMethod]
         public void Add_AfterRemove_ReusesDeletedSlot()
         {
@@ -532,12 +528,12 @@ namespace Lab12Test
             var plant1 = new Plant("TestPlant1", "Green", 1);
             var plant2 = new Plant("TestPlant2", "Red", 2);
             collection.Add(1, plant1);
-            collection.Remove(1); // Помечаем слот как удалённый
-            collection.Add(1, plant2); // Должно занять удалённый слот
-            Assert.AreEqual("TestPlant2", collection.FindByKey(1).Name, "Добавление после удаления должно занять удалённый слот.");
+            collection.Remove(1); // РџРѕРјРµС‡Р°РµРј СЃР»РѕС‚ РєР°Рє СѓРґР°Р»С‘РЅРЅС‹Р№
+            collection.Add(1, plant2); // Р”РѕР»Р¶РЅРѕ Р·Р°РЅСЏС‚СЊ СѓРґР°Р»С‘РЅРЅС‹Р№ СЃР»РѕС‚
+            Assert.AreEqual("TestPlant2", collection.FindByKey(1).Name, "Р”РѕР±Р°РІР»РµРЅРёРµ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ РґРѕР»Р¶РЅРѕ Р·Р°РЅСЏС‚СЊ СѓРґР°Р»С‘РЅРЅС‹Р№ СЃР»РѕС‚.");
         }
 
-        // Тест полного заполнения таблицы
+        // РўРµСЃС‚ РїРѕР»РЅРѕРіРѕ Р·Р°РїРѕР»РЅРµРЅРёСЏ С‚Р°Р±Р»РёС†С‹
         [TestMethod]
         public void Add_FullTable_ThrowsInvalidOperationException()
         {
@@ -547,7 +543,7 @@ namespace Lab12Test
             var plant3 = new Plant("TestPlant3", "Blue", 3);
             var plant4 = new Plant("TestPlant4", "Yellow", 4);
             var plant5 = new Plant("TestPlant5", "Purple", 5);
-            var key1 = new CollisionKey(1, 0); // Все ключи имеют хеш-код 0
+            var key1 = new CollisionKey(1, 0); // Р’СЃРµ РєР»СЋС‡Рё РёРјРµСЋС‚ С…РµС€-РєРѕРґ 0
             var key2 = new CollisionKey(2, 0);
             var key3 = new CollisionKey(3, 0);
             var key4 = new CollisionKey(4, 0);
@@ -559,11 +555,11 @@ namespace Lab12Test
             try
             {
                 collection.Add(key5, plant5);
-                Assert.Fail("Добавление в полностью заполненную таблицу должно выбросить исключение.");
+                Assert.Fail("Р”РѕР±Р°РІР»РµРЅРёРµ РІ РїРѕР»РЅРѕСЃС‚СЊСЋ Р·Р°РїРѕР»РЅРµРЅРЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ РґРѕР»Р¶РЅРѕ РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.");
             }
             catch (InvalidOperationException)
             {
-                Assert.IsTrue(true, "Ожидаемое исключение InvalidOperationException выброшено.");
+                Assert.IsTrue(true, "РћР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ InvalidOperationException РІС‹Р±СЂРѕС€РµРЅРѕ.");
             }
         }
     }
